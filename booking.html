@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="booking.js"></script>
+    <title>Taxi Booking System</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Booking System</h1> 
+        <form>     
+            <label><b>Customer Name: </b><input type="text" name="cname" maxlength="250" placeholder="required" required></label></br>
+            <label><b>Phone Number </b><input type="text" name="phone" placeholder="required" required></label></br>
+            <label><b>Unit Number </b><input type="text" name="unumber" maxlength="40"></label></br>
+            <label><b>Street Number </b><input type="text" name="snumber" maxlength="40" placeholder="required" required></label></br>
+            <label><b>Street Name </b><input type="text" name="stname" maxlength="250" placeholder="required" required></label></br>
+            <label><b>Suburb </b><input type="text" name="sbname" maxlength="250"></label></br>
+            <label><b>Destination Suburb </b><input type="text" name="dsbname" maxlength="250"></label></br>
+            <label><b>Pickup Date </b><input type="date" name="date" id="datechooser" required></label></br>
+            <label><b>Pickup Time </b><input type="time" name="time" id="timechooser" required></label></br>
+            <input name="submit" type ="button" onClick="getData('booking.php', 'reference',
+                cname.value, phone.value, unumber.value, snumber.value, stname.value, sbname.value, dsbname.value, date.value, time.value)"
+                value="Make a Booking"></br> <!-- Submit booking details to booking.php via getData() from booking.js -->
+        </form>
+        <!-- this script formats the date and time fields, setting them to the current date and time -->
+        <script>
+            //get html form elements
+            const dateInput = document.getElementById('datechooser');
+            const timeInput = document.getElementById('timechooser');
+
+            //get current date and time
+            let date = new Date();
+
+            //format time to 24 hour clock
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+            const formattedTime = `${hours}:${minutes}`;
+
+            //set date and time to current date and time
+            dateInput.value = date.toISOString().split('T')[0]; 
+            timeInput.value = formattedTime;
+        </script>
+    </div>
+    <hr>
+    <!-- this div is used to display the reference number and booking information -->
+    <div id="reference"></div>
+</body>
+</html>
